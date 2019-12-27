@@ -49,7 +49,7 @@ export class AppComponent {
     //Define contents
     const contents: any[] = [];
     //Add header
-    contents.push({ alignment: 'center', text: '南小一(7)班口算练习',style: 'header' });
+    contents.push({ alignment: 'center', text: '南小一(7)班口算练习',style: 'header',lineHeight: 2 });
     //Get kousuan formula array
     const kousuans = this.generateKousuans();
     //Column quantity
