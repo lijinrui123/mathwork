@@ -30,28 +30,48 @@ export class AppComponent {
       };
   }
 
-  downloadKouSuan(){
-    const dd = this.getContent();
+  downloadOralCalc() {
+    //Get kousuan formula array
+    const oralCalcs = this.generateOralCalcs();
+    const dd = this.getContent(oralCalcs);
     let blob = new Blob([JSON.stringify(dd)], { type: 'text/plain' });
     //this.download(blob, 'lianxi.json');
     pdfMake.createPdf(dd).download('口算练习.pdf');
   }
 
-  generateKousuans() {
-    const kousuans = [];
-    for (let i = 0; i < 5; i++) {
-      kousuans.push(this.generateFormulaList());
-    }
-    return kousuans;
+  downloadSubOralCalc() {
+    //Get kousuan formula array
+    const oralCalcs = this.generateSubOralCalcs();
+    const dd = this.getContent(oralCalcs);
+    let blob = new Blob([JSON.stringify(dd)], { type: 'text/plain' });
+    //this.download(blob, 'lianxi.json');
+    pdfMake.createPdf(dd).download('减法口算练习.pdf');
   }
 
-  getContent(): any {
+  generateOralCalcs() {
+    const oralCalcs = [];
+    for (let i = 0; i < 5; i++) {
+      oralCalcs.push(this.generateFormulaList());
+    }
+    return oralCalcs;
+  }
+
+  generateSubOralCalcs() {
+    const oralCalcs = [];
+    for (let i = 0; i < 5; i++) {
+      oralCalcs.push(this.generateSubFormulaList());
+    }
+    return oralCalcs;
+  }
+
+  getContent(kousuans: any[]): any {
     //Define contents
     const contents: any[] = [];
     //Add header
-    contents.push({ alignment: 'center', text: '南小一(7)班口算练习',style: 'header',lineHeight: 2 });
-    //Get kousuan formula array
-    const kousuans = this.generateKousuans();
+    contents.push({ alignment: 'center', text: '南小一(7)班口算练习', style: 'header', lineHeight: 1.5 });
+    //Add name and class
+    contents.push({ alignment: 'center', text: '班级_______ 姓名______', style: 'header', lineHeight: 2 });
+
     //Column quantity
     const columnQuantities = kousuans.length;
     //Rotate arrary and add into contents
@@ -59,7 +79,7 @@ export class AppComponent {
       const row = {
         alignment: 'justify',
         columns: [],
-        lineHeight: 2
+        lineHeight: 1.8
       };
       for (let j = 0; j < columnQuantities; j++) {
         row.columns.push(kousuans[j][i]);
@@ -103,6 +123,14 @@ export class AppComponent {
     return list;
   }
 
+  generateSubFormulaList(): string[] {
+    const list = [];
+    for (let i = 0; i < 29; i++) {
+      list.push(this.getSubFormula());
+    }
+    return list;
+  }
+
   getAddFormula(): string {
     const opA = Math.floor((Math.random() * 10) + 1);
     const opB = Math.floor((Math.random() * 20) + 1);
@@ -113,10 +141,8 @@ export class AppComponent {
   }
 
   getSubFormula(): string {
-    const opA = Math.floor((Math.random() * 10) + 1);
-    let opB = Math.floor((Math.random() * 20) + 1);
-    if (opB < opA)
-      return opA + " - " + opB + " ="
+    const opA = this.getRandomNumber(9, 1);
+    let opB = this.getRandomNumber(19, 11);
     return opB + " - " + opA + " ="
   }
 
@@ -134,5 +160,9 @@ export class AppComponent {
       link.click();
       window.document.body.removeChild(link);
     }
+  }
+
+  getRandomNumber(max: number, min: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
