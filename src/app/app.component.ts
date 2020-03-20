@@ -39,6 +39,15 @@ export class AppComponent {
     pdfMake.createPdf(dd).download('口算练习.pdf');
   }
 
+  downloadOralCalc100() {
+    //Get kousuan formula array
+    const oralCalcs = this.generateOralCalcs100();
+    const dd = this.getContent(oralCalcs);
+    let blob = new Blob([JSON.stringify(dd)], { type: 'text/plain' });
+    //this.download(blob, 'lianxi.json');
+    pdfMake.createPdf(dd).download('口算练习.pdf');
+  }
+
   downloadSubOralCalc() {
     //Get kousuan formula array
     const oralCalcs = this.generateSubOralCalcs();
@@ -48,6 +57,16 @@ export class AppComponent {
     pdfMake.createPdf(dd).download('减法口算练习.pdf');
   }
 
+  downloadSub100OralCalc() {
+    //Get kousuan formula array
+    const oralCalcs = this.generateSub100OralCalcs();
+    const dd = this.getContent(oralCalcs);
+    let blob = new Blob([JSON.stringify(dd)], { type: 'text/plain' });
+    //this.download(blob, 'lianxi.json');
+    pdfMake.createPdf(dd).download('100以内减法口算练习.pdf');
+  }
+
+
   generateOralCalcs() {
     const oralCalcs = [];
     for (let i = 0; i < 5; i++) {
@@ -56,10 +75,26 @@ export class AppComponent {
     return oralCalcs;
   }
 
+  generateOralCalcs100() {
+    const oralCalcs = [];
+    for (let i = 0; i < 5; i++) {
+      oralCalcs.push(this.generateAddFormula100List());
+    }
+    return oralCalcs;
+  }
+
   generateSubOralCalcs() {
     const oralCalcs = [];
     for (let i = 0; i < 5; i++) {
       oralCalcs.push(this.generateSubFormulaList());
+    }
+    return oralCalcs;
+  }
+
+  generateSub100OralCalcs() {
+    const oralCalcs = [];
+    for (let i = 0; i < 5; i++) {
+      oralCalcs.push(this.generateSubFormula100List());
     }
     return oralCalcs;
   }
@@ -123,10 +158,26 @@ export class AppComponent {
     return list;
   }
 
+  generateAddFormula100List(): string[] {
+    const list = [];
+    for (let i = 0; i < 29; i++) {
+      list.push(this.getAddFormula100());
+    }
+    return list;
+  }
+
   generateSubFormulaList(): string[] {
     const list = [];
     for (let i = 0; i < 29; i++) {
       list.push(this.getSubFormula());
+    }
+    return list;
+  }
+
+  generateSubFormula100List(): string[] {
+    const list = [];
+    for (let i = 0; i < 29; i++) {
+      list.push(this.getSubFormulaUnder100());
     }
     return list;
   }
@@ -140,10 +191,22 @@ export class AppComponent {
     return opA + " + " + opB + " ="
   }
 
+  getAddFormula100(): string {
+    const opA = this.getRandomNumber(50, 11);
+    let opB = this.getRandomNumber(50, 11);
+    return opB + " + " + opA + " ="
+  }
+
   getSubFormula(): string {
     const opA = this.getRandomNumber(9, 1);
     let opB = this.getRandomNumber(19, 11);
     return opB + " - " + opA + " ="
+  }
+
+  getSubFormulaUnder100(){
+    const opA = this.getRandomNumber(100, 50);
+    let opB = this.getRandomNumber(50, 1);
+    return opA + " - " + opB + " ="
   }
 
   download(blob: Blob, fileName: string) {
