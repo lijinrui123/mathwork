@@ -1,7 +1,18 @@
-<h1>李其真专用考试模拟</h1>
-<button class="button" (click)="downloadOralCalc()">产生口算作业</button>
-<button class="button" (click)="downloadSubOralCalc()">产生减法口算作业</button>
-<hr>
-<button class="button" (click)="downloadOralCalc100()">产生100以内加法口算作业</button>
-<button class="button" (click)="downloadSub100OralCalc()">产生100以内减法口算作业</button>
+<div class="text-center m-2">
+  <h1>李其真专用考试模拟</h1>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="inputTargetWeight">学校名称</label>
+      <input type="text" class="form-control" id="inputTargetWeight" name="inputTargetWeight" [(ngModel)]="schoolName">
+    </div>
+  </div>
+  <button class="button" (click)="downloadOralCalc()">产生口算作业</button>
+  <button class="button" (click)="downloadSubOralCalc()">产生减法口算作业</button>
+  <hr>
+  <button class="button" (click)="downloadOralCalc100()">产生100以内加法口算作业</button>
+  <button class="button" (click)="downloadSub100OralCalc()">产生100以内减法口算作业</button>
 
+  <h1>学前儿童数学练习</h1>
+  <button class="button" (click)="downloadOralCalc10()">产生10以内加法口算作业</button>
+  <button class="button" (click)="downloadSub10OralCalc()">产生10以内减法口算作业</button>
+</div>
