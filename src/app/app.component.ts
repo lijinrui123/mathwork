@@ -10,7 +10,7 @@ import pdfFonts from './vfs_fonts.js';
 })
 export class AppComponent {
   closeResult: string;
-  schoolName: string;
+  schoolName = '南小一(7)班';
 
   constructor(private modalService: NgbModal) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -131,7 +131,7 @@ export class AppComponent {
     // Add header
     contents.push({
       alignment: 'center',
-      text: this.schoolName ? this.schoolName : '南小一(7)班口算练习',
+      text: this.schoolName,
       style: 'header',
       lineHeight: 1.5
     });

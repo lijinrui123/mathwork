@@ -1,11 +1,14 @@
 <div class="text-center m-2">
-  <h1>李其真专用考试模拟</h1>
-  <div class="form-row">
-    <div class="form-group col-md-12">
-      <label for="inputTargetWeight">学校名称</label>
-      <input type="text" class="form-control" id="inputTargetWeight" name="inputTargetWeight" [(ngModel)]="schoolName">
+  <h1>李家专用考试模拟</h1>
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="inputSchool">学校名称</label>
+        <input type="text" class="form-control" id="inputSchool" name="inputSchool" [(ngModel)]="schoolName">
+      </div>
     </div>
-  </div>
+  </form>
+
   <button class="button" (click)="downloadOralCalc()">产生口算作业</button>
   <button class="button" (click)="downloadSubOralCalc()">产生减法口算作业</button>
   <hr>
